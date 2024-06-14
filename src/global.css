@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+
+*, html , body, input , button{
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased ;
+}
+
+.font1{
+  font-family: 'Inter', sans-serif;
+
+}
+
+.font2{
+  font-family: "'Fira Mono', monospace";
+
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+*,input,button{
+  font-weight: 500;
+}
