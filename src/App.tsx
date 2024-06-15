@@ -16,8 +16,9 @@ import { createBrowserRouter, RouterProvider       } from "react-router-dom";
 import { AboutMe } from "./pages/AboutMe";
 import { PageProjetos } from "./pages/Projetos/page-projetos";
 import { DropMenuSettings } from "./components/drop-menu/drop-menu-settings";
+import { LinkForPage } from "./components/links/link-for-page";
+import { Projeto } from "./pages/Projetos";
 
-//const [textFontFamily , setTextFontFamily] = useState("")
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/projetos",
-    element: <div>Projetos</div>,
+    element:<Projeto/>,
     
   },
   {
@@ -42,6 +43,8 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
+
+
   const [isOpen, setOpen] = useState(false);
 
   function toggleOpen() {
@@ -52,6 +55,7 @@ export function App() {
   let [,,, url] = window.location.href.split('/')
 
   if(url == "" ) url = "index";
+  const [font , _] = useState(window.localStorage.getItem("font")?? "Inter")
 
   return (
     <div className="flex w-full  h-screen ">
@@ -62,51 +66,35 @@ export function App() {
           </button>
         )}
 
-        {isOpen && (
-          <div className="z-10 inset-0  fixed md:relative w-full lg:w-[250px] md:w-[200px]  h-screen bg-[#f3f3f3] grid grid-rows-3 grid-cols-1 py-5 px-2 border-r border-[#DDDDDD]">
+       
+          <div className={`z-10 inset-0  fixed md:relative w-full lg:w-[250px] md:w-[200px]  h-screen bg-[#f3f3f3] grid grid-rows-3 grid-cols-1 py-5 px-2 border-r border-[#DDDDDD] ${isOpen ? "opacity-100 " : "opacity-0 hidden "} `}>
             <div className="flex flex-col lg:items-left items-center  gap-4 ">
-              <p className="flex items-center gap-2">
+              <p className={`flex items-center gap-2 mb-5 font-${font}`}>
                 <span className="cursor-pointer">
                   <ArrowLeft onClick={toggleOpen} className="size-5" />
                 </span>{" "}
                 Daniel Fernandes Silva
               </p>
 
-              <a
-                href="/about"
-                className="flex items-center  lg:justify-start justify-center  gap-4  w-full px-4  py-1 rounded-lg mt-5 bg-transparent hover:bg-[#D0D0D0] transition-all "
-              >
-                <span>
-                  <Search className="size-4" />
-                </span>
-                Sobre mim
-              </a>
+              <LinkForPage text="Sobre mim" href="/about" >
+                <Search className="size-4"/>
+              </LinkForPage>
 
-              <a
-                href="/projetos"
-                className="flex items-center lg:justify-start justify-center gap-4  w-full px-4  py-1 rounded-lg bg-transparent hover:bg-[#D0D0D0] transition-all"
-              >
-                <span>
-                  <Monitor className="size-4" />
-                </span>
-                Projetos
-              </a>
+              <LinkForPage text="Projetos" href="/projetos" >
+                <Monitor className="size-4" />
+              </LinkForPage>
             </div>
 
             <div className="flex  lg:items-left items-center ">
-              <a href="/" className=" flex justify-center lg:justify-start items-center gap-4  w-full px-4 py-1 rounded-lg bg-transparent hover:bg-[#D0D0D0] transition-all">
-                <span>
-                  <Terminal className="size-5" />
-                </span>
-                Index
-              </a>
+              <LinkForPage text="Index" href="/" >
+                <Terminal className="size-4" />
+              </LinkForPage>
             </div>
 
             <footer className="flex  items-end justify-center">
               <span className="text-sm">Feito com ReactJs e Typescript</span>
             </footer>
           </div>
-        )}
       </div>
 
       <div className="flex flex-col w-full ">

@@ -1,7 +1,7 @@
-export function Projetos(){
+export function Projeto(){
     return(
         <div>
-            
+            Projetos
         </div>
     )
 }
